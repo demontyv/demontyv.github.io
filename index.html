@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Releases</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        header {
+            background-color: #333;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .desktop {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .folder, .file {
+            text-align: center;
+            cursor: pointer;
+        }
+        .folder img, .file img {
+            width: 100px;
+            height: 100px;
+        }
+        .folder p, .file p {
+            margin-top: 8px;
+            font-size: 1rem;
+        }
+        .hidden {
+            display: none;
+        }
+        .back-button {
+            display: none;
+            text-align: center;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #ffffff;
+            background-color: #444;
+            border: none;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>RELEASES</header>
+    <div class="desktop" id="main-desktop">
+        <!-- Single folder -->
+        <div class="folder" data-folder="psykose">
+            <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-1/512/folder-icon.png" alt="Folder Icon">
+            <p>Psykose</p>
+        </div>
+    </div>
+
+    <!-- Folder content -->
+    <div class="desktop hidden" id="psykose">
+        <div class="file">
+            <img src="https://via.placeholder.com/100?text=" alt="File Icon">
+            <p></p>
+        </div>
+        <div class="file">
+            <img src="https://via.placeholder.com/100?text=" alt="File Icon">
+            <p></p>
+        </div>
+        <!-- Add more tracks here -->
+    </div>
+
+    <button class="back-button" id="back-button">Back</button>
+
+    <script>
+        const folders = document.querySelectorAll('.folder');
+        const backButton = document.getElementById('back-button');
+        const mainDesktop = document.getElementById('main-desktop');
+
+        folders.forEach(folder => {
+            folder.addEventListener('click', () => {
+                const folderContent = document.getElementById(folder.dataset.folder);
+                mainDesktop.classList.add('hidden');
+                folderContent.classList.remove('hidden');
+                backButton.style.display = 'block';
+            });
+        });
+
+        backButton.addEventListener('click', () => {
+            const activeFolder = document.querySelector('.desktop:not(.hidden)');
+            activeFolder.classList.add('hidden');
+            mainDesktop.classList.remove('hidden');
+            backButton.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
